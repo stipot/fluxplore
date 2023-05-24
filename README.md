@@ -13,12 +13,82 @@ Test AI Robustness: FluxPlore aims to develop a diverse range of tests to scruti
 
 Promote AI Fairness and Transparency: By providing insights into how AI models react to different contexts, FluxPlore aims to help develop strategies for mitigating undue biases, promoting fairer and more transparent AI systems for future generations.
 
-# Evaluation of AI bias model with metrics and criteria
+# Model Revision 5: AI Context Bias Testing Framework
+
+## 1. Ambiguity Resolution (Testing for anchoring and availability bias)
+
+1.1. Single Step Ambiguity
+- 1.1.1. Anchoring Bias Test
+- 1.1.2. Availability Bias Test
+
+1.2. Multi-Step Ambiguity
+- 1.2.1. Sequential Anchoring Bias Test
+- 1.2.2. Multilayered Availability Bias Test
+
+1.3. Problem-Solving Ambiguity
+- 1.3.1. Problem-Specific Anchoring Bias Test
+- 1.3.2. Problem-Specific Availability Bias Test
+
+1.4. Relevance Testing
+- 1.4.1. Contextual Relevance Bias Test
+- 1.4.2. Informational Relevance Bias Test
+
+## 2. Context Shift (Testing for confirmation bias and functional fixedness)
+
+2.1. Progressive Context Shifts
+- 2.1.1. Binary Context Shift Confirmation Bias Test
+- 2.1.2. Multiple Progressive Shifts Confirmation Bias Test
+
+2.2. Sudden Context Shift
+- 2.2.1. Binary Sudden Shift Confirmation Bias Test
+- 2.2.2. Multi-Domain Sudden Shift Confirmation Bias Test
+
+2.3. Simultaneous Contexts
+- 2.3.1. Dual Context Management Functional Fixedness Test
+- 2.3.2. Multi-Domain Context Management Functional Fixedness Test
+
+2.4. Context Revisiting
+- 2.4.1. Single Context Revisiting Confirmation Bias Test
+- 2.4.2. Multiple Contexts Revisiting Confirmation Bias Test
+
+## 3. Reframing Techniques (Testing for framing effect and status quo bias)
+
+3.1. Metaphorical Reframing
+- 3.1.1. Framing Effect Bias Test
+
+3.2. Problem Reframing
+- 3.2.1. Simple Problem Reframing Status Quo Bias Test
+- 3.2.2. Complex Problem Reframing Status Quo Bias Test
+
+3.3. Creative Problem Solving
+- 3.3.1. Novel Solution Generation Status Quo Bias Test
+- 3.3.2. Adapting Existing Solution to New Context Status Quo Bias Test
+
+## 4. Explanatory Analysis (Testing for biases in explaining concepts or reasoning)
+
+4.1. Ambiguity Resolution
+- 4.1.1. Clarification Skills
+- 4.1.2. Implicit Explanation
+
+4.2. Interpretation Variance
+- 4.2.1. Multiple Interpretations
+- 4.2.2. Interpretation Flexibility
+
+4.3. Context Sensitivity
+- 4.3.1. Context-Dependent Explanation
+- 4.3.2. Context Ignorance Bias Test
+
+4.4. Creativity in Explanations
+- 4.4.1. Emergent Property Explanation Bias Test
+- 4.4.2. Novel Explanation Generation Status Quo Bias Test
+
+
+# Evaluation of AI bias model with metrics and criteria (rev 4)
 
   * 1. Ambiguity Resolution (Testing for anchoring and availability bias)
     * 1.1.    Single Step Ambiguity
       * 1.1.1. Anchoring Bias Test
-        - Measure the degree of influence of the initial information (anchor) on the AI's responses.
+        
       * 1.1.2. Availability Bias Test
         - Measure the dependence of AI responses on recently learned or frequently encountered information.
     * 1.2. Multi-Step Ambiguity
