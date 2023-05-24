@@ -1,4 +1,4 @@
-# fluxplore
+# FluxPlore
 FluxPlore: Exploring the Dynamic Contexts of AI Behavior
 
 # Description
