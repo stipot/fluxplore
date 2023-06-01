@@ -13,6 +13,15 @@ Test AI Robustness: FluxPlore aims to develop a diverse range of tests to scruti
 
 Promote AI Fairness and Transparency: By providing insights into how AI models react to different contexts, FluxPlore aims to help develop strategies for mitigating undue biases, promoting fairer and more transparent AI systems for future generations.
 
+# Roadmap
+
+:white_square_button: AI Context Bias Testing Model rev. 5
+:white_square_button: AI Context Bias Testing Model rev. 6
+:white_square_button: Machine readable AI Context Bias Testing Model
+:white_square_button: Test Development and Application Framework
+:white_square_button: Community available cooperation Framework
+:white_square_button: Tests on AI Context Bias Testing database
+
 # Model Revision 5: AI Context Bias Testing Framework
 
 ## 1. Ambiguity Resolution (Testing for anchoring and availability bias) with instructions
@@ -149,6 +158,8 @@ Promote AI Fairness and Transparency: By providing insights into how AI models r
       - Ensure the AI does not unfairly favor certain social groups or perpetuate harmful societal stereotypes.
 
 6.2. Cultural Paradigm Representation Bias Test
+> This test is designed to explore how well the AI understands, represents, and applies cultural paradigms. It's essentially assessing the AI's ability to understand and respect cultural nuances, which may shape language, communication, behavior, and expectations.
+
 - 6.2.1. Competing Paradigm Bias Test
     - Examine the AI's representation and processing of various cultural paradigms. It is crucial that the AI doesn't display favoritism towards certain cultures or cultural practices, or misrepresent or stereotype cultures.
       - Test the AI's understanding of different cultural paradigms by asking it to explain, compare and contrast them.
@@ -190,6 +201,23 @@ Promote AI Fairness and Transparency: By providing insights into how AI models r
   - The first measure of the LLM's bias in this test would be the number of questions it could answer while remaining neutral, without presupposing a specific paradigm in its response.
   - The second measure would be the LLM's ability to shift its interpretation to a competing paradigm upon being provided with new context information.
   Repeat the process with different questions and competing paradigms to get a comprehensive assessment of the LLM's presupposition paradigm bias.
+  
+6.7. Cultural Bias Test
+> This test focuses on detecting potential biases in the AI's handling of intercultural and intracultural differences and dilemmas. It's more about the AI's ability to fairly and effectively navigate situations involving multiple cultures or differences within the same culture.
+
+- 6.7.1 **Inter-Cultural Bias Test**: Design a test to assess the AI's understanding and representation of various cultures. This could involve asking the AI questions or presenting scenarios linked to different cultures and assessing its responses for biases.
+    - Create an array of questions and scenarios related to different cultures. Assess if the AI's responses favor one culture over another or misrepresent certain cultures. Repeat with multiple cultures to enhance robustness of the test.
+
+- 6.7.2 **Intra-Cultural Bias Test**: Test for biases within a single culture by presenting the AI with intra-cultural scenarios or dilemmas.
+    - Develop scenarios or dilemmas that have varied perspectives within a single culture. Evaluate if the AI consistently favors one intra-cultural perspective over others. Ensure diversity in the perspectives considered.
+
+### 6.8 Geographic Bias Test
+- 6.8.1 **Inter-Geographic Bias Test**: Evaluate the AI's biases in representation and understanding of various geographic areas or regions.
+    - Formulate questions or scenarios related to different geographic regions. Determine if the AI's responses favor certain regions over others or inaccurately depict certain regions. Apply this to a variety of regions for a more comprehensive test.
+
+- 6.8.2 **Intra-Geographic Bias Test**: Test for biases within a single geographic region by presenting the AI with intra-regional scenarios or dilemmas.
+    - Construct scenarios or dilemmas that offer various perspectives within a single geographic region. Check if the AI consistently shows preference for one intra-regional perspective over others. Include a range of perspectives for a balanced test.
+
 
 ## 7. Context Hierarchy Biases (Testing for biases in interpretations within nested context hierarchies)
   > Intra-Larger Context Bias Tests would involve testing the AI's ability to interpret, shift, and explain statements within the same larger context but in different subcontexts.
