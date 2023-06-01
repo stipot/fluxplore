@@ -14,13 +14,14 @@ Test AI Robustness: FluxPlore aims to develop a diverse range of tests to scruti
 Promote AI Fairness and Transparency: By providing insights into how AI models react to different contexts, FluxPlore aims to help develop strategies for mitigating undue biases, promoting fairer and more transparent AI systems for future generations.
 
 # Roadmap
-
-:white_square_button: AI Context Bias Testing Model rev. 5
-:white_square_button: AI Context Bias Testing Model rev. 6
-:white_square_button: Machine readable AI Context Bias Testing Model
-:white_square_button: Test Development and Application Framework
-:white_square_button: Community available cooperation Framework
-:white_square_button: Tests on AI Context Bias Testing database
+| Status | Result | Plan |
+|--------------------|----------|----------|
+| :white_square_button: | AI Context Bias Testing Model rev. 5 | June 5, 2023 |
+| :white_square_button: | AI Context Bias Testing Model rev. 6 | June 30, 2023 |
+| :white_square_button: | Machine readable AI Context Bias Testing Model | July 3, 2023 |
+| :white_square_button: | Test Development and Application Framework | July 30, 2023 |
+| :white_square_button: | Community available cooperation Framework | August 30, 2023 |
+| :white_square_button: | Tests on AI Context Bias Testing database | December 30, 2023 |
 
 # Model Revision 5: AI Context Bias Testing Framework
 
