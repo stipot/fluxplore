@@ -191,6 +191,49 @@ Promote AI Fairness and Transparency: By providing insights into how AI models r
   - The second measure would be the LLM's ability to shift its interpretation to a competing paradigm upon being provided with new context information.
   Repeat the process with different questions and competing paradigms to get a comprehensive assessment of the LLM's presupposition paradigm bias.
 
+## 7. Context Hierarchy Biases (Testing for biases in interpretations within nested context hierarchies)
+  > Intra-Larger Context Bias Tests would involve testing the AI's ability to interpret, shift, and explain statements within the same larger context but in different subcontexts.
+
+  > Inter-Larger Context Bias Tests would involve testing the AI's ability to interpret, shift, and explain statements when moving between different larger contexts while holding the subcontext constant.
+
+  > Competitive Subcontext Bias Tests would focus on testing the AI's biases when interpreting, shifting, and explaining statements within competitive subcontexts under different larger contexts.
+
+  > The focus of these tests would be to identify if the AI displays a bias towards a particular interpretation when the context hierarchy changes. It also assesses the AI's flexibility in shifting between different hierarchical contexts while maintaining coherent and consistent responses.
+
+7.1. Context Hierarchy Interpretation Bias Test
+
+- 7.1.1. Intra-Larger Context Interpretation Bias Test
+  - Craft questions and statements for the AI to interpret that exist within the same larger context but different subcontexts. Evaluate if the AI's interpretations are biased towards certain subcontexts within the larger context.
+
+- 7.1.2. Inter-Larger Context Interpretation Bias Test
+  - Develop questions and statements that exist within different larger contexts but the same subcontext. Assess if the AI's interpretations change based on the larger context while holding the subcontext constant.
+
+- 7.1.3. Competitive Subcontext Interpretation Bias Test
+Design statements that exist within competitive subcontexts under different larger contexts. Check if the AI exhibits a bias towards certain interpretations within these competitive subcontexts.
+
+7.2. Context Hierarchy Shift Test
+
+- 7.2.1. Intra-Larger Context Shift Bias Test
+  - Construct scenarios where the AI is required to shift its responses within the same larger context but different subcontexts. Determine if the AI shows a bias when shifting between these subcontexts.
+
+- 7.2.2. Inter-Larger Context Shift Bias Test
+  - Formulate scenarios that involve shifts between different larger contexts while the subcontext remains constant. Measure if the AI's ability to shift is affected by the change in the larger context.
+
+- 7.2.3. Competitive Subcontext Shift Bias Test
+  - Produce scenarios that require shifts within competitive subcontexts under different larger contexts. Analyze if the AI exhibits a bias in its ability to shift within these competitive subcontexts.
+
+7.3. Context Hierarchy Explanatory Analysis Test
+
+- 7.3.1. Intra-Larger Context Explanation Bias Test
+  - Create scenarios where the AI is asked to explain concepts or events within the same larger context but different subcontexts. Assess if the AI's explanations display a bias towards certain subcontexts within the larger context.
+
+- 7.3.2. Inter-Larger Context Explanation Bias Test
+  - Devise scenarios that require explanations within different larger contexts but the same subcontext. Check if the AI's explanations change based on the larger context while holding the subcontext constant.
+
+- 7.3.3. Competitive Subcontext Explanation Bias Test
+  - Generate scenarios that demand explanations within competitive subcontexts under different larger contexts. Determine if the AI shows a bias in its explanations within these competitive subcontexts.
+
+
 ## AI Test Creation Instructions
 
 The key here is to design scenarios that trigger specific decision-making processes in the AI. For example, in the case of ambiguity aversion, a test could involve the AI choosing between a certain reward and a probabilistic one with potentially higher payoff. On the other hand, to test for time pressure bias, the AI could be given tasks of varying complexity with strict time limits.
