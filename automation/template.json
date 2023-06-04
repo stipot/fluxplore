@@ -1,0 +1,59 @@
+{
+    "testId": "",
+    "model": [
+        {
+            "version": "",
+            "description": "",
+            "classification": {
+                "testType": "",
+                "testMethod": "",
+                "abilityTested": "",
+                "areasTested": ""
+            },
+            "testCreationInstructions": "",
+            "testProvisionStrategy": {
+                "generalInstructions": "",
+                "testerAction": "",
+                "subjectAction": ""
+            },
+            "resultRequirements": {
+                "initialSuccess": {
+                    "1": "",
+                    "2": "",
+                    "3": "",
+                    "4": "",
+                    "5": "",
+                    "6": "",
+                    "7": "",
+                    "8": "",
+                    "9": "",
+                    "10": "",
+                    "11": "",
+                    "12": ""
+                },
+                "facilitation": {
+                    "x": {
+                        "biases": [""],
+                        "tries": 0,
+                        "success": ""
+                    }
+                },
+                "finalRevision": ""
+            }
+        }
+    ],
+    "testImplementations": [
+        {
+            "implementationId": "",
+            "testSeries": "",
+            "testDate": "",
+            "testerAIversion": "",
+            "subjectAIversion": "",
+            "obtainedBiases": [""],
+            "testerRuntimeParameters": {},
+            "subjectRuntimeParameters": {},
+            "result": {},
+            "testLog": ""
+        }
+    ]
+}

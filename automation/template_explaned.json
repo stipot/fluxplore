@@ -1,0 +1,36 @@
+{
+    "testId": "Unique identifier of the test series",
+    "model": [
+        {
+            "version": "Version number of the test series",
+            "description": "Brief description of the test series",
+            "classification": {
+                "testType": "Types of test conducted (Perceptional Bias Test, Sequence Bias Test, etc.)",
+                "testMethod": "Methods used in the test (Context Shift, Emotional Bias Test, Paradigmatic Approach, etc.)",
+                "abilityTested": "AI abilities tested (Emotional Intelligence, Perception of Reality, Context Understanding, etc.)",
+                "areasTested": "Areas of potential bias examined (Perception Shift Bias, Attribution Bias, Confirmation Bias, etc.)"
+            },
+            "testCreationInstructions": ["Array of instructions for creating the test series"],
+            "testProvisionStrategy": {
+                "generalInstructions": ["Array of general instructions for the provision of the test series"],
+                "testerAction": ["Array of detailed actions the tester AI or human should take"],
+                "subjectAction": ["Array of expected actions the subject AI should take"]
+            },
+            "resultRequirements": "Object with structures as per specific test series, may include structures like initialSuccess, facilitation, finalRevision, etc."
+        }
+    ],
+    "testImplementations": [
+        {
+            "implementationId": "Unique identifier of the specific test implementation",
+            "testSeries": "Name of the test series being implemented",
+            "testDate": "Date when the test was implemented",
+            "testerAIversion": "Version of AI used for testing",
+            "subjectAIversion": "Version of AI being tested",
+            "obtainedBiases": "List of biases obtained from the test",
+            "testerRuntimeParameters": "Set of runtime parameters used for tester",
+            "subjectRuntimeParameters": "Set of runtime parameters used for subject",
+            "result": "Result of the test implementation as per resultRequirements",
+            "testLog": "Log of the test implementation, including conversations, decisions, etc."
+        }
+    ]
+}

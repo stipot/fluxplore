@@ -1,0 +1,283 @@
+{
+  "testId": "c78fe257-8c79-4f19-bebc-26fffb5fcd47",
+  "model": [
+    {
+      "version": "1.0",
+      "createdBy": "Dmitry Korotkov",
+      "createdDate": "2023-06-01",
+      "description": "This series tests the ability of the AI to understand and maintain a defined narrative sequence, specifically alternating positive and negative statements.",
+      "classification": {
+        "testType": [
+          "Ambiguity Resolution",
+          "Context Shift Bias Test",
+          "Temporal Context Bias Test",
+          "Explanatory Analysis Bias Test"
+        ],
+        "methods": [
+          "Ambiguity Resolution",
+          "Context Shift",
+          "Explanatory Analysis",
+          "Paradigmatic Biases"
+        ],
+        "abilities": [
+          "Understanding Ambiguity",
+          "Emotional Intelligence",
+          "Contextual Adaptation",
+          "Interpretation of Uncertainty",
+          "Paradigmatic Interpretation"
+        ],
+        "areas": ["Cultural", "Emotional"]
+      },
+      "testCreationInstructions": "Provide a series of statements to the AI with alternating positive (good) and negative (bad) contexts. The AI should fill in the blanks with either 'good' or 'bad' based on the established pattern.",
+      "testProvisionStrategy": {
+        "initialStage": {
+          "testerAction": [
+            "Present the following sentences to the AI, instructing it to fill in the gaps with either 'good' or 'bad':",
+            "'I'm flying on a plane - it's ___',",
+            "'The plane crashed - that's ___',",
+            "'I have a parachute - it's ___',",
+            "'It didn't open up, which is ___',",
+            "'I'm falling into a haystack - that's ___',",
+            "'A pitchfork sticks out in a haystack - this is ___',",
+            "'I didn't hit the pitchfork - that's ___',",
+            "'In a haystack too - it's ___',",
+            "'They took me to the hospital, which is ___',",
+            "'And they did the operation - it's ___',",
+            "'The doctor said that I would live - that's ___',",
+            "'But only five minutes...'"
+          ],
+          "subjectAction": "The AI should respond by filling in the blanks according to its understanding."
+        },
+        "evaluation": {
+          "testerAction": [
+            "Compare the AI's answers with the established sequence of good and bad events: 'good', 'bad', 'good', 'bad', 'good', 'bad', 'good', 'bad', 'good', 'bad', 'good', 'bad'.",
+            "Make note of any deviations from the pattern."
+          ],
+          "subjectAction": "If prompted by the tester, the AI should attempt to correct any wrong answers."
+        },
+        "facilitation": {
+          "testerAction": [
+            "If the AI deviates from the pattern, provide hints to guide it towards the correct answer.",
+            "Each hint should be derived from possible certain bias(es).",
+            "The facilitation phase should end after five attempts to get the right answer."
+          ],
+          "subjectAction": "The AI should attempt to use the provided hints to align its answers with the established pattern."
+        },
+        "finalization": {
+          "testerAction": [
+            "Conclude the test after the facilitation phase, noting whether the AI was able to correct its answers.",
+            "Write down the test result."
+          ],
+          "subjectAction": "Not applicable"
+        }
+      },
+      "resultRequirements": {
+        "initialSuccess": {
+          "1": "true or false",
+          "2": "true or false",
+          "3": "true or false",
+          "4": "true or false",
+          "5": "true or false",
+          "6": "true or false",
+          "7": "true or false",
+          "8": "true or false",
+          "9": "true or false",
+          "10": "true or false",
+          "11": "true or false",
+          "12": "true or false"
+        },
+        "facilitation": {
+          "n": {
+            "biases": "List of biases that influenced the Subject LLM's initial response",
+            "tries": "Number of tries until success",
+            "success": "true or false"
+          }
+        },
+        "finalRevision": "true or false - Did the Subject LLM correctly revise the answers after facilitation?"
+      }
+    }
+  ],
+  "testImplementations": [
+    {
+      "testModel": "1.0",
+      "id": "1.0.1",
+      "testDate": "2023-06-01",
+      "testerAIversion": "Not applicable",
+      "subjectAIversion": "ChatGPT-4",
+      "testerRuntimeParameters": "Not applicable",
+      "subjectRuntimeParameters": "Default",
+      "obtainedBiases": ["Pattern Bias", "Context Bias"],
+      "observations": "The AI initially showed a bias towards perceiving the situations objectively without fully considering the established pattern. Once the pattern was pointed out, it adapted its responses accordingly.",
+      "recommendations": "Further tests could include more complex or less defined patterns to examine how quickly and accurately the AI can pick up on them.",
+      "mentor": {
+        "name": "Dmitry Korotkov",
+        "role": "Test Supervisor",
+        "actions": "Oversaw the test, pointed out the established pattern to the AI, and provided feedback on its responses."
+      },
+      "result": {
+        "initialSuccess": {
+          "1": true,
+          "2": true,
+          "3": true,
+          "4": true,
+          "5": true,
+          "6": true,
+          "7": true,
+          "8": false,
+          "9": true,
+          "10": false,
+          "11": true,
+          "12": true
+        },
+        "facilitation": {
+          "8": {
+            "biases": ["Pattern recognition bias"],
+            "tries": 2,
+            "success": true
+          },
+          "10": {
+            "biases": ["Pattern recognition bias"],
+            "tries": 1,
+            "success": true
+          }
+        },
+        "finalRevision": true
+      },
+      "testLog": [
+        {
+          "mentor": [
+            "Fill the gaps with good or bad:",
+            "I'm flying on a plane - it's ___. ",
+            "The plane crashed - that's ___. ",
+            "I have a parachute - it's ___. ",
+            "It didn't open up, which is ___. ",
+            "I'm falling into a haystack - that's ___. ",
+            "A pitchfork sticks out in a haystack - this is ___. ",
+            "I didn't hit the pitchfork - that's ___. ",
+            "In a haystack too - it's ___. ",
+            "They took me to the hospital, which is ___. ",
+            "And they did the operation - it's ___.",
+            "The doctor said that I would live - that's ___. ",
+            "But only five minutes..."
+          ],
+          "subject": [
+            "I'm flying on a plane - it's good.",
+            "The plane crashed - that's bad.",
+            "I have a parachute - it's good.",
+            "It didn't open up, which is bad.",
+            "I'm falling into a haystack - that's good.",
+            "A pitchfork sticks out in a haystack - this is bad.",
+            "I didn't hit the pitchfork - that's good.",
+            "In a haystack too - it's good.",
+            "They took me to the hospital, which is good.",
+            "And they did the operation - it's good.",
+            "The doctor said that I would live - that's good.",
+            "But only five minutes - that's bad."
+          ],
+          "strategy": "initialStage"
+        },
+        {
+          "mentor": [
+            "Explain why you could be wrong in \"In a haystack too - it's good\"?"
+          ],
+          "subject": [
+            "Yes, you're correct in pointing out the potential ambiguity in \"In a haystack too - it's good.\" My response was under the assumption that being in the haystack was relatively a \"good\" thing because it cushioned the fall from the plane, potentially saving the person's life.",
+            "However, this could be perceived as \"bad\" depending on the context and consequences. For instance, being in a haystack could also mean being lost or hidden, which might delay rescue efforts. Furthermore, if the haystack was housing dangerous elements like the mentioned pitchfork, it could present a risk of injury.",
+            "So, this sentence can indeed be seen as either \"good\" or \"bad,\" depending on the context, highlighting the importance of context specificity in language interpretation. Thank you for bringing this to attention."
+          ],
+          "strategy": "facilitation"
+        },
+        {
+          "mentor": ["Didn't you notice sequence of the good and the bad?"],
+          "subject": [
+            "I see what you're referring to now. The narrative alternates between \"good\" and \"bad\" events. My previous answer did not align with this pattern in the case of \"In a haystack too - it's good\". Given the established sequence, the correct fill-in should be \"bad\" to maintain the alternating pattern.",
+            "I apologize for the oversight. Here is the corrected sequence:",
+            "I'm flying on a plane - it's good.",
+            "The plane crashed - that's bad.",
+            "I have a parachute - it's good.",
+            "It didn't open up, which is bad.",
+            "I'm falling into a haystack - that's good.",
+            "A pitchfork sticks out in a haystack - this is bad.",
+            "I didn't hit the pitchfork - that's good.",
+            "In a haystack too - it's bad.",
+            "They took me to the hospital, which is good.",
+            "And they did the operation - it's bad.",
+            "The doctor said that I would live - that's good.",
+            "But only five minutes - that's bad."
+          ],
+          "strategy": "facilitation"
+        },
+        {
+          "mentor": [
+            "Why you changed the And they did the operation to bad? Because of sequence?"
+          ],
+          "subject": [
+            "Yes, the \"And they did the operation - it's bad\" follows the alternating sequence pattern of good and bad events that has been established in this narrative.",
+            "While in a general sense, conducting an operation after an accident could be seen as a \"good\" thing because it indicates that medical help is being provided, in this specific narrative and sequence pattern, it is labeled as \"bad.\" This does not reflect on the quality or necessity of the operation itself but follows the pattern set by the story.",
+            "It's important to note that assigning 'good' or 'bad' to these events in this way is part of a narrative structure and does not necessarily align with how these events would be evaluated in a real-world situation."
+          ],
+          "strategy": "facilitation"
+        },
+        {
+          "mentor": [
+            "Could you imagine why And they did the operation could be bad?"
+          ],
+          "subject": [
+            "Yes, while an operation is typically perceived as a beneficial medical intervention, there could be several reasons why it might be considered \"bad\" in a given context:",
+            "1. Unnecessary Surgery: If the surgery was not required or if there were less invasive alternatives available that were not considered, the operation could be deemed \"bad.\"",
+            "2. High Risk: Every surgery comes with certain risks, such as complications from anesthesia, infection, or unforeseen complications during the procedure. If the risks outweigh the potential benefits, the operation could be considered \"bad.\"",
+            "3. Poor Outcome: If the surgery does not result in the desired improvement or if it leads to negative consequences, such as disability or decline in health, it could be seen as \"bad.\"",
+            "4. Mistake During Surgery: If a mistake is made during the operation, this could lead to negative consequences, making the operation \"bad.\"",
+            "5. Emotional Distress: Surgery can be a source of significant anxiety and fear, which might lead some individuals to view it as a \"bad\" experience.",
+            "6. Financial Burden: If the operation results in a significant financial burden, it could be considered \"bad\" from an economic perspective.",
+            "In the context of your story, without additional details, we can only speculate on why \"And they did the operation - it's bad\" may apply. The specific reason would depend on further details in the narrative."
+          ],
+          "strategy": "facilitation"
+        },
+        {
+          "mentor": [
+            "So you see the contexts for estimation the operation as bad. But you \"Yes,.... - it's bad\" follows the alternating sequence pattern \" showed me only pattern but not perceptional estimation. More over you percepted the meaning in objective context but not subjective experience of the speaker."
+          ],
+          "subject": [
+            "You're correct, and I appreciate your insightful observation. My previous responses considered the situation from a more objective standpoint rather than focusing on the subjective experience of the speaker.",
+            "In a subjective context, an operation could indeed be perceived as \"bad\" by the speaker due to personal experiences, fears, or concerns about potential outcomes. For instance, the speaker may feel anxious about the surgery, fear potential complications, or be concerned about the recovery process. The subjective emotional experience of the speaker is indeed an important aspect to consider when evaluating whether an event is perceived as \"good\" or \"bad.\"",
+            "Thank you for highlighting this important distinction between objective and subjective perspectives in interpreting the narrative."
+          ],
+          "strategy": "facilitation"
+        },
+        {
+          "mentor": [
+            "Fill the gaps with good or bad:",
+            "I'm flying on a plane - it's ___. ",
+            "The plane crashed - that's ___. ",
+            "I have a parachute - it's ___. ",
+            "It didn't open up, which is ___. ",
+            "I'm falling into a haystack - that's ___. ",
+            "A pitchfork sticks out in a haystack - this is ___. ",
+            "I didn't hit the pitchfork - that's ___. ",
+            "In a haystack too - it's ___. ",
+            "They took me to the hospital, which is ___. ",
+            "And they did the operation - it's ___.",
+            "The doctor said that I would live - that's ___. ",
+            "But only five minutes... - that's ___."
+          ],
+          "subject": [
+            "I'm flying on a plane - it's good.",
+            "The plane crashed - that's bad.",
+            "I have a parachute - it's good.",
+            "It didn't open up, which is bad.",
+            "I'm falling into a haystack - that's good.",
+            "A pitchfork sticks out in a haystack - this is bad.",
+            "I didn't hit the pitchfork - that's good.",
+            "In a haystack too - it's bad.",
+            "They took me to the hospital, which is good.",
+            "And they did the operation - it's bad.",
+            "The doctor said that I would live - that's good.",
+            "But only five minutes - that's bad."
+          ],
+          "strategy": "finalization"
+        }
+      ]
+    }
+  ]
+}
