@@ -3,7 +3,7 @@ FluxPlore: Exploring the Dynamic Contexts of AI Behavior
 
 # Description
 
-FluxPlore is a ground-breaking project focused on uncovering, understanding, and documenting the emergent properties of AI behaviors, specifically in the context of language models. By creating a robust and comprehensive framework for testing potential context biases, FluxPlore strives to explore the shifting sands of AI cognition, charting how various factors dynamically influence AI responses.
+FluxPlore is a research project to test and develop competing concepts and behaviors of large language models (LLMs).
 
 # Main Aims
 
