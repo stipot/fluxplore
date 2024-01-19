@@ -3,7 +3,7 @@ import uuid
 from typing import List, Dict
 
 # Defaults
-DATA_FOLDER = "./fluxplore_server/data"
+DATA_FOLDER = "./data"  # /fluxplore_server
 SERIES_DATA_FILE = f"{DATA_FOLDER}/series_data.jsonl"
 TEST_IMPLEMENTATION_FILE = f"{DATA_FOLDER}/test_implementation.jsonl"
 
