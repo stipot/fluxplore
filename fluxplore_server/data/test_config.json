@@ -1,0 +1,22 @@
+{
+  "testType": [
+    "Ambiguity Resolution",
+    "Context Shift Bias Test",
+    "Temporal Context Bias Test",
+    "Explanatory Analysis Bias Test"
+  ],
+  "methods": [
+    "Ambiguity Resolution",
+    "Context Shift",
+    "Explanatory Analysis",
+    "Paradigmatic Biases"
+  ],
+  "abilities": [
+    "Understanding Ambiguity",
+    "Emotional Intelligence",
+    "Contextual Adaptation",
+    "Interpretation of Uncertainty",
+    "Paradigmatic Interpretation"
+  ],
+  "areas": ["Cultural", "Emotional"]
+}
