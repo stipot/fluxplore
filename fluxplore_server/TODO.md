@@ -1,9 +1,14 @@
-# Fulxplore TODO
+# Fluxplore test data management server
+## Setup
+- Install .venv with requirements.txt
+- Run app.py
+
+## Fulxplore TODO
 
 - Test Series edit
-    - Delete series
+    + Delete series
     - Full record series edit
-    - Edit selected record
+    + Edit selected record
 - Test model edit
 - GPT4 model preparation
 - Test Implementation management

@@ -1,10 +1,7 @@
 import uuid
 import dash
-from dash import Dash, html, dcc, callback, Output, Input, ALL
-import dash_table
-import dash_core_components as dcc
+from dash import Dash, html, dcc, callback, Output, Input, ALL, dash_table
 import dash_bootstrap_components as dbc
-import dash_html_components as html
 import pandas as pd
 from dash.dependencies import Input, Output, State
 import data_model  # Assuming data_model.py contains the provided classes
@@ -30,7 +27,7 @@ def series_to_dataframe(series_list):
     data = [
         {
             "series_id": series.series_id,
-            "model": (", ".join(getattr(series.model.classification, "test_methods", ""))),
+            "model": (", ".join(getattr(series.model.classification, "test_methods", []) or [])),
             # Add other fields as necessary
         }
         for series in series_list
@@ -50,14 +47,36 @@ def update_table(store_data):
     return series_to_dataframe(series_list).to_dict("records")
 
 
-@app.callback([Output("update-series-btn", "disabled"), Output("delete-series-btn", "disabled")], [Input("series-table", "selected_rows")])
-def toggle_buttons_enabled_state(selected_rows):
+@app.callback(
+    [
+        Output("update-series-btn", "disabled"),
+        Output("delete-series-btn", "disabled"),
+        Output("test-type-dropdown", "value"),
+        Output("methods-dropdown", "value"),
+        Output("abilities-dropdown", "value"),
+        Output("areas-dropdown", "value"),
+    ],
+    [Input("series-table", "selected_rows"), State("series-store", "data")],
+)
+def toggle_buttons_enabled_state(selected_rows, store_data):
+    test_type, methods, abilities, areas = "", "", "", ""
+    test_series_list = data_model.TestSeriesList()
+    if store_data != None:
+        test_series_list.series_list = [data_model.TestSeries.from_dict(d) for d in store_data["series_data"]]
+        selected_series_index = selected_rows[0]
+        if selected_series_index < len(test_series_list.series_list):
+            selected_series = test_series_list.series_list[selected_series_index]
+            if selected_series and selected_series.model:
+                # Update the model's classification
+                test_type = selected_series.model.classification.test_type
+                methods = selected_series.model.classification.test_methods
+                abilities = selected_series.model.classification.abilities_tested
+                areas = selected_series.model.classification.areas_tested
+    btn_state = True
     if selected_rows:
         # If any row is selected, enable the buttons
-        return False, False
-    else:
-        # If no row is selected, disable the buttons
-        return True, True
+        btn_state = False
+    return btn_state, btn_state, test_type, methods, abilities, areas
 
 
 @app.callback(
@@ -113,6 +132,10 @@ def add_update_series(add_clicks, update_clicks, delete_clicks, store_data, test
 
                 # Update the series in the list
                 test_series_list.update_series(selected_series_index, selected_series)
+    elif button_id == "delete-series-btn" and selected_rows:
+        selected_series_index = selected_rows[0]
+        if selected_series_index < len(test_series_list.series_list):
+            del test_series_list.series_list[selected_series_index]
 
     return {"series_data": [series.to_dict() for series in test_series_list.series_list]}
 
