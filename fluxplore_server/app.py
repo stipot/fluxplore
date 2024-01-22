@@ -32,7 +32,7 @@ def series_to_dataframe(series_list):
             "Method": (", ".join(getattr(series.model.classification, "test_methods", []) or [])),
             "Type": (", ".join(getattr(series.model.classification, "test_type", []) or [])),
             "Area": (", ".join(getattr(series.model.classification, "areas_tested", []) or [])),
-            "Description": (", ".join(getattr(series.model.classification, "series_description", []) or [])),
+            "Description": getattr(series.model.classification, "series_description", "") or "",
             # Add other fields as necessary
         }
         for series in series_list
