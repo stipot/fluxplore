@@ -13,14 +13,21 @@ with open(f"{DATA_FOLDER}/test_config.json", "r") as file:
 
 
 class Classification:
-    def __init__(self, test_type: List[str], test_methods: List[str], abilities_tested: List[str], areas_tested: List[str]):
+    def __init__(self, test_type: List[str], test_methods: List[str], abilities_tested: List[str], areas_tested: List[str], series_description: str):
         self.test_type = test_type
         self.test_methods = test_methods
         self.abilities_tested = abilities_tested
         self.areas_tested = areas_tested
+        self.series_description = series_description
 
     def to_dict(self):
-        return {"test_type": self.test_type, "test_methods": self.test_methods, "abilities_tested": self.abilities_tested, "areas_tested": self.areas_tested}
+        return {
+            "test_type": self.test_type,
+            "test_methods": self.test_methods,
+            "abilities_tested": self.abilities_tested,
+            "areas_tested": self.areas_tested,
+            "series_description": self.series_description,
+        }
 
     @staticmethod
     def from_dict(data):
@@ -29,6 +36,7 @@ class Classification:
             test_methods=data.get("test_methods", []),
             abilities_tested=data.get("abilities_tested", []),
             areas_tested=data.get("areas_tested", []),
+            series_description=data.get("series_description", []),
         )
 
 
@@ -253,6 +261,7 @@ class TestSeriesList:
     def update_series(self, index, series: TestSeries):
         if index < len(self.series_list):
             self.series_list[index] = series
+        self.save()
 
     def get_series_by_id(self, series_id: str):
         return next((series for series in self.series_list if series.series_id == series_id), None)

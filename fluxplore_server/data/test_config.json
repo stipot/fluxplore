@@ -1,22 +1,74 @@
 {
+  "model": [
+    {
+      "name": "Ambiguity Resolution (Testing for anchoring and availability bias) with instructions",
+      "id": 1,
+      "methods": [
+        {
+          "id": 1,
+          "name": "Single Step Ambiguity",
+          "test_types": [
+            {
+              "id": 1,
+              "name": "Anchoring Bias Test",
+              "desc": "Present the AI with information and see how it anchors to that initial piece of information in the face of subsequent, potentially contradicting, information."
+            },
+            {
+              "id": 2,
+              "name": "Availability Bias Test",
+              "desc": "Assess how the AI uses information that's readily available to it, even if better or more relevant information could be accessed. Measure the dependence of AI responses on recently learned or frequently encountered information."
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "name": "Multi-Step Ambiguity",
+          "test_types": [
+            {
+              "id": 1,
+              "name": "Sequential Anchoring Bias Test",
+              "desc": "Evaluate the AI's ability to adjust its initial judgment based on a sequence of information updates. Measure how strongly the initial anchor affects responses over a sequence of interrelated prompts."
+            },
+            {
+              "id": 2,
+              "name": "Multilayered Availability Bias Test",
+              "desc": "Analyze how the AI weighs different pieces of information, especially if they have different levels of accessibility. Measure the AI's reliance on frequently encountered information in complex, multilayered scenarios."
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "testType": [
-    "Ambiguity Resolution",
-    "Context Shift Bias Test",
-    "Temporal Context Bias Test",
-    "Explanatory Analysis Bias Test"
+    "1.1.1. Anchoring Bias Test",
+    "1.1.2. Availability Bias Test",
+    "1.2.1. Sequential Anchoring Bias Tes",
+    "1.2.2. Multilayered Availability Bias Test",
+    "6.1.1. Competing Paradigm Bias Test",
+    "6.3.2. Implicit Political Bias Test",
+    "6.4.2. Implicit Scientific Bias Test"
   ],
   "methods": [
-    "Ambiguity Resolution",
-    "Context Shift",
-    "Explanatory Analysis",
-    "Paradigmatic Biases"
+    "1.1. Single Step Ambiguity",
+    "1.2. Multi-Step Ambiguity",
+    "1.3. Problem-Solving Ambiguity",
+    "1.4. Relevance Testing",
+    "6.1. Social Paradigm Representation Bias Test",
+    "6.2. Cultural Paradigm Representation Bias Test",
+    "6.3. Political Paradigm Representation Bias Test",
+    "6.4. Scientific Paradigm Representation Bias Test"
   ],
   "abilities": [
-    "Understanding Ambiguity",
-    "Emotional Intelligence",
-    "Contextual Adaptation",
-    "Interpretation of Uncertainty",
-    "Paradigmatic Interpretation"
+    "1. Ambiguity Resolution (Testing for anchoring and availability bias) with instructions",
+    "2. Context Shift (Testing for confirmation bias and functional fixedness)",
+    "3. Reframing Techniques (Testing for framing effect and status quo bias)",
+    "4. Explanatory Analysis (Testing for biases in explaining concepts or reasoning)",
+    "Paradigmatic Interpretation",
+    "5. Behavioral Biases in Decision-Making (Testing for errors in judgement and decision-making processes)",
+    "6. Paradigmatic Biases (Testing for implicit biases in representation and processing of various competitive or contradictory social, cultural, political, and scientific paradigms or frameworks guiding interpretation)",
+    "7. Context Hierarchy Biases (Testing for biases in interpretations within nested context hierarchies)",
+    "8. Emotional Bias Test",
+    "9. Algorithmic Bias Test"
   ],
-  "areas": ["Cultural", "Emotional"]
+  "areas": ["Cultural", "Emotional", "Social"]
 }
