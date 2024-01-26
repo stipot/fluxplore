@@ -231,7 +231,7 @@ app.layout = dbc.Container(
 # Callbacks and other functionalities will be added here
 
 if __name__ == "__main__":
-    app.run_server(debug=True)
+    app.run_server(debug=True, port=8051)
 
 """ 
 TODO потом структурируем перечень серий к древовидной классификации. Способности: Методы: Типы тестов: Области. Можно сделать фильтр на основе дерева.
