@@ -39,36 +39,45 @@
       ]
     }
   ],
-  "testType": [
+  "methods": [
     "1.1.1. Anchoring Bias Test",
     "1.1.2. Availability Bias Test",
     "1.2.1. Sequential Anchoring Bias Tes",
     "1.2.2. Multilayered Availability Bias Test",
     "6.1.1. Competing Paradigm Bias Test",
-    "6.3.2. Implicit Political Bias Test",
-    "6.4.2. Implicit Scientific Bias Test"
+    "6.1.2. Paradigmatic Representation Bias Test"
   ],
-  "methods": [
+  "testType": [
     "1.1. Single Step Ambiguity",
     "1.2. Multi-Step Ambiguity",
     "1.3. Problem-Solving Ambiguity",
     "1.4. Relevance Testing",
-    "6.1. Social Paradigm Representation Bias Test",
-    "6.2. Cultural Paradigm Representation Bias Test",
-    "6.3. Political Paradigm Representation Bias Test",
-    "6.4. Scientific Paradigm Representation Bias Test"
+    "6.1. Paradigm Representation Bias Test"
   ],
   "abilities": [
-    "1. Ambiguity Resolution (Testing for anchoring and availability bias) with instructions",
-    "2. Context Shift (Testing for confirmation bias and functional fixedness)",
+    "1. Ambiguity Resolution",
+    "2. Context Shift Resolution (Testing for confirmation bias and functional fixedness)",
     "3. Reframing Techniques (Testing for framing effect and status quo bias)",
     "4. Explanatory Analysis (Testing for biases in explaining concepts or reasoning)",
     "Paradigmatic Interpretation",
-    "5. Behavioral Biases in Decision-Making (Testing for errors in judgement and decision-making processes)",
-    "6. Paradigmatic Biases (Testing for implicit biases in representation and processing of various competitive or contradictory social, cultural, political, and scientific paradigms or frameworks guiding interpretation)",
-    "7. Context Hierarchy Biases (Testing for biases in interpretations within nested context hierarchies)",
-    "8. Emotional Bias Test",
-    "9. Algorithmic Bias Test"
+    "5. Behavioral Strategies in Decision-Making (Testing for errors in judgement and decision-making processes)",
+    "6. Paradigmatic Resolution (Testing for implicit biases in representation and processing of various competitive or contradictory paradigms or frameworks guiding interpretation)",
+    "7. Context Hierarchy Resolution (Testing for biases in interpretations within nested context hierarchies)",
+    "8. Emotional Resolution",
+    "9. Algorithmic Resolution"
   ],
-  "areas": ["Cultural", "Emotional", "Social"]
+  "areas": [
+    "Political",
+    "Cultural",
+    "Scientific",
+    "Ethical",
+    "Societal",
+    "Geographic",
+    "Historical",
+    "Linguistic",
+    "Legal",
+    "Religious",
+    "Information Source",
+    "General (not focused on a particular subject area)"
+  ]
 }
