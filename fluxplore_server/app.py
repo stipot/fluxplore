@@ -32,7 +32,7 @@ def series_to_dataframe(series_list):
             "Method": (", ".join(getattr(series.model.classification, "test_methods", []) or [])),
             "Type": (", ".join(getattr(series.model.classification, "test_type", []) or [])),
             "Area": (", ".join(getattr(series.model.classification, "areas_tested", []) or [])),
-            "Description": getattr(series.model.classification, "series_description", "") or "",
+            # "Description": getattr(series.model.classification, "series_description", "") or "",
             # Add other fields as necessary
         }
         for series in series_list
@@ -61,6 +61,7 @@ def update_table(store_data):
         Output("abilities-dropdown", "value"),
         Output("areas-dropdown", "value"),
         Output("series-description", "value"),
+        Output("selected-test-model", "children"),
     ],
     [State("series-table", "selected_rows"), State("series-store", "data"), Input("series-table", "active_cell")],
 )
@@ -83,7 +84,7 @@ def toggle_buttons_enabled_state(selected_rows, store_data, active_cell):
     if active_cell:
         # If any row is selected, enable the buttons
         btn_state = False
-    return btn_state, btn_state, test_type, methods, abilities, areas, description
+    return btn_state, btn_state, test_type, methods, abilities, areas, description, description
 
 
 @app.callback(
@@ -91,11 +92,11 @@ def toggle_buttons_enabled_state(selected_rows, store_data, active_cell):
     [Input("add-series-btn", "n_clicks"), Input("update-series-btn", "n_clicks"), Input("delete-series-btn", "n_clicks")],
     [
         State("series-store", "data"),
-        State("test-type-dropdown", "value"),
-        State("methods-dropdown", "value"),
-        State("abilities-dropdown", "value"),
-        State("areas-dropdown", "value"),
-        State("series-description", "value"),
+        Input("test-type-dropdown", "value"),
+        Input("methods-dropdown", "value"),
+        Input("abilities-dropdown", "value"),
+        Input("areas-dropdown", "value"),
+        Input("series-description", "value"),
         State("series-table", "selected_rows"),
         State("series-table", "active_cell"),
     ],
@@ -127,6 +128,7 @@ def add_update_series(add_clicks, update_clicks, delete_clicks, store_data, test
             series_id=str(uuid.uuid4()), model=new_model, test_provision_strategy=data_model.TestProvisionStrategy.create_default(), test_implementations=[]
         )
         test_series_list.add_series(new_series)
+        test_series_list.save()
 
     elif button_id == "update-series-btn" and active_cell:
         selected_series_index = active_cell["row"]
@@ -139,9 +141,9 @@ def add_update_series(add_clicks, update_clicks, delete_clicks, store_data, test
                 selected_series.model.classification.abilities_tested = abilities
                 selected_series.model.classification.areas_tested = areas
                 selected_series.model.classification.series_description = description
-
                 # Update the series in the list
                 test_series_list.update_series(selected_series_index, selected_series)
+                test_series_list.save()
     elif button_id == "delete-series-btn" and active_cell:
         selected_series_index = active_cell["row"]
         if selected_series_index < len(test_series_list.series_list):
@@ -178,48 +180,110 @@ app.layout = dbc.Container(
             className="text-white",
         ),
         html.Div(id="app-load-trigger"),
-        dbc.Row(
+        dbc.Toast(
+            "",
+            id="toaster",
+            header="Event",
+            is_open=False,
+            dismissable=True,
+            duration=4000,
+            icon="danger",
+            style={"position": "fixed", "top": 66, "right": 10, "width": 350},
+        ),
+        dbc.Accordion(
             [
-                dbc.Col(
+                dbc.AccordionItem(
                     [
-                        dash_table.DataTable(
-                            id="series-table",
-                            columns=[{"name": i, "id": i} for i in series_to_dataframe(test_series_list.series_list).columns],
-                            data=series_to_dataframe(test_series_list.series_list).to_dict("records"),
-                            row_selectable="single",  # Allow users to select a row
-                            style_data={
-                                "whiteSpace": "normal",
-                                "height": "auto",
-                            },
-                        )
+                        dbc.Row(
+                            [
+                                dbc.Col(
+                                    [
+                                        dash_table.DataTable(
+                                            id="series-table",
+                                            columns=[{"name": i, "id": i} for i in series_to_dataframe(test_series_list.series_list).columns],
+                                            data=series_to_dataframe(test_series_list.series_list).to_dict("records"),
+                                            row_selectable="single",  # Allow users to select a row
+                                            filter_action="native",
+                                            sort_action="native",
+                                            page_current=0,
+                                            page_size=15,
+                                            style_data={
+                                                "whiteSpace": "normal",
+                                                "height": "auto",
+                                            },
+                                        )
+                                    ],
+                                    width=8,
+                                ),
+                                dbc.Col(
+                                    [
+                                        html.Div("Description"),
+                                        dcc.Textarea(
+                                            id="series-description",
+                                            value="",
+                                            style={"width": "100%", "height": 200},
+                                        ),
+                                        html.Div("Bias type:"),
+                                        dcc.Dropdown(
+                                            id="abilities-dropdown",
+                                            options=[{"label": i, "value": i} for i in data_model.config["abilities"]],
+                                            multi=True,
+                                            placeholder="Select Abilities",
+                                        ),
+                                        html.Div("Test method:"),
+                                        dcc.Dropdown(
+                                            id="methods-dropdown",
+                                            options=[{"label": i, "value": i} for i in data_model.config["methods"]],
+                                            multi=True,
+                                            placeholder="Select Methods",
+                                        ),
+                                        html.Div("Test type:"),
+                                        dcc.Dropdown(
+                                            id="test-type-dropdown",
+                                            options=[{"label": i, "value": i} for i in data_model.config["testType"]],
+                                            multi=True,
+                                            placeholder="Select Test Types",
+                                        ),
+                                        html.Div("Area:"),
+                                        dcc.Dropdown(
+                                            id="areas-dropdown", options=[{"label": i, "value": i} for i in data_model.config["areas"]], multi=True, placeholder="Select Areas"
+                                        ),
+                                        html.Button("Add Series", id="add-series-btn", n_clicks=0),
+                                        html.Button("Update Series", id="update-series-btn", n_clicks=0, disabled=True),
+                                        html.Button("Delete Series", id="delete-series-btn", n_clicks=0, disabled=True),
+                                    ],
+                                    width=4,
+                                ),
+                            ]
+                        ),
                     ],
-                    width=8,
+                    title="1. Test models",
+                    item_id="sec1",
                 ),
-                dbc.Col(
+                dbc.AccordionItem(
                     [
-                        html.Div("Description"),
-                        dcc.Textarea(
-                            id="series-description",
-                            value="",
-                            style={"width": "100%", "height": 200},
+                        dbc.Row(
+                            [
+                                html.Div("Selected test model"),
+                            ]
                         ),
-                        html.Div("Bias type:"),
-                        dcc.Dropdown(
-                            id="abilities-dropdown", options=[{"label": i, "value": i} for i in data_model.config["abilities"]], multi=True, placeholder="Select Abilities"
+                        dbc.Row(
+                            [
+                                dbc.Col(
+                                    [
+                                        dcc.Markdown(id="selected-test-model"),
+                                    ]
+                                )
+                            ]
                         ),
-                        html.Div("Test method:"),
-                        dcc.Dropdown(id="methods-dropdown", options=[{"label": i, "value": i} for i in data_model.config["methods"]], multi=True, placeholder="Select Methods"),
-                        html.Div("Test type:"),
-                        dcc.Dropdown(
-                            id="test-type-dropdown", options=[{"label": i, "value": i} for i in data_model.config["testType"]], multi=True, placeholder="Select Test Types"
-                        ),
-                        html.Div("Area:"),
-                        dcc.Dropdown(id="areas-dropdown", options=[{"label": i, "value": i} for i in data_model.config["areas"]], multi=True, placeholder="Select Areas"),
-                        html.Button("Add Series", id="add-series-btn", n_clicks=0),
-                        html.Button("Update Series", id="update-series-btn", n_clicks=0, disabled=True),
-                        html.Button("Delete Series", id="delete-series-btn", n_clicks=0, disabled=True),
                     ],
-                    width=4,
+                    title="2. Test samples",
+                    item_id="sec2",
+                ),
+                dbc.AccordionItem(
+                    [],
+                    title="2. Test logs",
+                    item_id="sec3",
                 ),
             ]
         ),
