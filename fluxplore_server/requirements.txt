@@ -2,3 +2,4 @@ ipykernel
 dash
 dash-bootstrap-components
 pandas
+dash_treeview_antd
