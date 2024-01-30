@@ -7,10 +7,6 @@ DATA_FOLDER = "./fluxplore_server/data"  #
 SERIES_DATA_FILE = f"{DATA_FOLDER}/series_data.jsonl"
 TEST_IMPLEMENTATION_FILE = f"{DATA_FOLDER}/test_implementation.jsonl"
 
-# Load JSON configuration
-with open(f"{DATA_FOLDER}/test_config.json", "r") as file:
-    config = json.load(file)
-
 
 class Classification:
     def __init__(self, test_type: List[str], test_methods: List[str], abilities_tested: List[str], areas_tested: List[str], series_description: str):
@@ -116,7 +112,7 @@ class TestImplementation:
     def __init__(
         self,
         implementation_id: str = None,
-        test_series: str = "",
+        test_desc: str = "",
         test_date: str = "",
         tester_ai_version: str = "",
         subject_ai_version: str = "",
@@ -124,11 +120,11 @@ class TestImplementation:
         tester_runtime_parameters: str = "",
         subject_runtime_parameters: str = "",
         result: str = "",
-        test_log: str = "",
+        test_log: List[str] = [],
     ):
         self.implementation_id = implementation_id if implementation_id else str(uuid.uuid4())
         self.implementation_id = implementation_id
-        self.test_series = test_series
+        self.test_desc = test_desc
         self.test_date = test_date
         self.tester_ai_version = tester_ai_version
         self.subject_ai_version = subject_ai_version
@@ -141,7 +137,7 @@ class TestImplementation:
     def to_dict(self):
         return {
             "implementation_id": self.implementation_id,
-            "test_series": self.test_series,
+            "test_desc": self.test_desc,
             "test_date": self.test_date,
             # ... include all other relevant fields
         }
@@ -150,7 +146,7 @@ class TestImplementation:
     def from_dict(data):
         return TestImplementation(
             implementation_id=data.get("implementation_id", ""),
-            test_series=data.get("test_series", ""),
+            test_desc=data.get("test_desc", ""),
             test_date=data.get("test_date", ""),
             # ... include all other relevant fields
         )
@@ -174,10 +170,9 @@ class TestImplementation:
 
 
 class TestSeries:
-    def __init__(self, series_id: str, model: Model, test_provision_strategy: TestProvisionStrategy, test_implementations: List[TestImplementation]):
+    def __init__(self, series_id: str, model: Model, test_implementations: List[TestImplementation]):
         self.series_id = series_id
         self.model = model
-        self.test_provision_strategy = test_provision_strategy
         self.test_implementations = test_implementations
 
     @staticmethod
@@ -185,7 +180,6 @@ class TestSeries:
         return TestSeries(
             series_id=str(uuid.uuid4()),
             model={},  # Default empty list or predefined model
-            test_provision_strategy=TestProvisionStrategy.create_default(),
             test_implementations=[TestImplementation.create_default()],
         )
 
@@ -194,6 +188,9 @@ class TestSeries:
             implementation = TestImplementation.create_default()
         self.test_implementations.append(implementation)
         self.save()  # Save the updated TestSeries
+
+    def get_implementation_by_id(self, imp_id: str):
+        return next((imp for imp in self.test_implementations if imp.implementation_id == imp_id), None)
 
     def save(self, file_name=SERIES_DATA_FILE):
         with open(file_name, "a") as file:
@@ -209,7 +206,6 @@ class TestSeries:
                 test_data = TestSeries(
                     series_id=data_dict["series_id"],
                     model=Model(**data_dict["model"]),
-                    test_provision_strategy=TestProvisionStrategy(**data_dict["test_provision_strategy"]),
                     test_implementations=[TestImplementation(**impl) for impl in data_dict["test_implementations"]],
                 )
                 loaded_data.append(test_data)
@@ -219,7 +215,6 @@ class TestSeries:
         return {
             "series_id": self.series_id,
             "model": self.model.to_dict(),  # Ensure Model has a to_dict method
-            "test_provision_strategy": self.test_provision_strategy.to_dict(),  # Ensure TestProvisionStrategy has a to_dict method
             "test_implementations": [ti.to_dict() for ti in self.test_implementations],  # Ensure TestImplementation has a to_dict method
         }
 
@@ -233,7 +228,10 @@ class TestSeries:
 
 
 class TestSeriesList:
-    def __init__(self):
+    def __init__(self, folder):
+        # Load JSON configuration
+        with open(f"{DATA_FOLDER}/test_config.json", "r") as file:
+            config = json.load(file)
         self.series_list = []
 
     def load(self, file_name=SERIES_DATA_FILE):
@@ -242,7 +240,6 @@ class TestSeriesList:
                 TestSeries(
                     series_id=data_dict["series_id"],
                     model=Model(**data_dict["model"]),
-                    test_provision_strategy=TestProvisionStrategy(**data_dict["test_provision_strategy"]),
                     test_implementations=[TestImplementation(**impl) for impl in data_dict["test_implementations"]],
                 )
                 for data_dict in [json.loads(line) for line in file]
@@ -276,18 +273,18 @@ class TestSeriesList:
 """ default_test_series = TestSeries.create_default()
 default_test_series.save() """
 
-# Create or load TestSeriesList
+""" # Create or load TestSeriesList
 series_list = TestSeriesList()
-series_list.load()
+series_list.load() """
 
 # Add a new TestSeries
 """ new_series = TestSeries.create_default()
 series_list.add_series(new_series) """
 
-# Add a new TestImplementation to a specific TestSeries by ID
+""" # Add a new TestImplementation to a specific TestSeries by ID
 series_id = "87e9c719-2633-4daa-ab49-0bd9c9ff6a04"
 new_implementation = TestImplementation.create_default()
 series_list.add_implementation_to_series(series_id, new_implementation)
 
 # You can also retrieve a specific series by ID
-specific_series = series_list.get_series_by_id(series_id)
+specific_series = series_list.get_series_by_id(series_id) """

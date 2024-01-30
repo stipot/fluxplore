@@ -1,7 +1,17 @@
 # Fluxplore test data management server
 ## Setup
 - Install .venv with requirements.txt
-- Run app.py
+- Install module in dev state
+```
+python setup.py develop
+```
+## Runtime
+-  Visual interface
+```
+run app.py
+```
+- Notebook
+Open ./explore.ipyb
 
 ## Fulxplore TODO
 
