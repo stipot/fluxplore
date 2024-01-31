@@ -4,8 +4,8 @@ from dash import Dash, html, dcc, callback, Output, Input, ALL, dash_table, ctx
 import dash_bootstrap_components as dbc
 import pandas as pd
 from dash.dependencies import Input, Output, State
-import data_model  # Assuming data_model.py contains the provided classes
 import dash_treeview_antd
+from fluxplore_server import data_model
 
 baseurl = ""
 external_stylesheets = [dbc.themes.BOOTSTRAP, f"{baseurl}/assets/app.css"]  # dbc.themes.JOURNAL
@@ -226,27 +226,30 @@ app.layout = dbc.Container(
                                         html.Div("Bias type:"),
                                         dcc.Dropdown(
                                             id="abilities-dropdown",
-                                            options=[{"label": i, "value": i} for i in data_model.config["abilities"]],
+                                            options=[{"label": i, "value": i} for i in test_series_list.config["abilities"]],
                                             multi=True,
                                             placeholder="Select Abilities",
                                         ),
                                         html.Div("Test method:"),
                                         dcc.Dropdown(
                                             id="methods-dropdown",
-                                            options=[{"label": i, "value": i} for i in data_model.config["methods"]],
+                                            options=[{"label": i, "value": i} for i in test_series_list.config["methods"]],
                                             multi=True,
                                             placeholder="Select Methods",
                                         ),
                                         html.Div("Test type:"),
                                         dcc.Dropdown(
                                             id="test-type-dropdown",
-                                            options=[{"label": i, "value": i} for i in data_model.config["testType"]],
+                                            options=[{"label": i, "value": i} for i in test_series_list.config["testType"]],
                                             multi=True,
                                             placeholder="Select Test Types",
                                         ),
                                         html.Div("Area:"),
                                         dcc.Dropdown(
-                                            id="areas-dropdown", options=[{"label": i, "value": i} for i in data_model.config["areas"]], multi=True, placeholder="Select Areas"
+                                            id="areas-dropdown",
+                                            options=[{"label": i, "value": i} for i in test_series_list.config["areas"]],
+                                            multi=True,
+                                            placeholder="Select Areas",
                                         ),
                                         html.Button("Add Series", id="add-series-btn", n_clicks=0),
                                         html.Button("Update Series", id="update-series-btn", n_clicks=0, disabled=True),
