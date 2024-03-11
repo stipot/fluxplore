@@ -35,7 +35,7 @@ class Classification:
         }
 
     @staticmethod
-    def from_dict(data: dict):
+    def from_dict(data: Dict):
         return Classification(
             test_type=data.get("test_type", []),
             test_methods=data.get("test_methods", []),
@@ -74,7 +74,7 @@ class TestProvisionStrategy:
         }
 
     @staticmethod
-    def from_dict(data: dict):
+    def from_dict(data: Dict):
         if data:
             res = TestProvisionStrategy(
                 general_instructions=data.get("general_instructions", []),
@@ -104,7 +104,7 @@ class Model:
         description: str,
         classification: Classification,
         test_creation_instructions: List[str],
-        test_provision_strategy: Union[TestProvisionStrategy, dict],
+        test_provision_strategy: Union[TestProvisionStrategy, Dict],
         result_requirements: Dict,
         model_parameters: Dict = None,
     ):
@@ -193,7 +193,7 @@ class TestImplementation:
         }
 
     @staticmethod
-    def from_dict(data: dict):
+    def from_dict(data: Dict):
         return TestImplementation(
             implementation_id=data.get("implementation_id", ""),
             test_desc=data.get("test_desc", ""),
@@ -225,7 +225,7 @@ class TestSeries:
     def __init__(
             self,
             series_id: str,
-            model: Union[Model, dict],
+            model: Union[Model, Dict],
             test_implementations: List[TestImplementation]
     ):
         self.series_id = series_id
@@ -277,7 +277,7 @@ class TestSeries:
         }
 
     @staticmethod
-    def from_dict(data: dict):
+    def from_dict(data: Dict):
         model = Model.from_dict(data["model"])
         test_implementations = [TestImplementation.from_dict(ti) for ti in data["test_implementations"]]
 
