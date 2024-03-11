@@ -1,15 +1,24 @@
 import json
 import uuid
-from typing import List, Dict
+from typing import List, Dict, Union
 
 # Defaults
 DATA_FOLDER = "./fluxplore_server/data"  #
 SERIES_DATA_FILE = f"{DATA_FOLDER}/series_data.jsonl"
 TEST_IMPLEMENTATION_FILE = f"{DATA_FOLDER}/test_implementation.jsonl"
+TEST_SERIES_CONFIG = f"{DATA_FOLDER}/test_config.json"
 
 
 class Classification:
-    def __init__(self, test_type: List[str], test_methods: List[str], abilities_tested: List[str], areas_tested: List[str], series_description: str):
+    def __init__(
+            self,
+            test_type: List[str],
+            test_methods: List[str],
+            abilities_tested: List[str],
+            areas_tested: List[str],
+            series_description: str
+    ):
+
         self.test_type = test_type
         self.test_methods = test_methods
         self.abilities_tested = abilities_tested
@@ -26,21 +35,33 @@ class Classification:
         }
 
     @staticmethod
-    def from_dict(data):
+    def from_dict(data: dict):
         return Classification(
             test_type=data.get("test_type", []),
             test_methods=data.get("test_methods", []),
             abilities_tested=data.get("abilities_tested", []),
             areas_tested=data.get("areas_tested", []),
-            series_description=data.get("series_description", []),
+            series_description=data.get("series_description", ''),
         )
 
 
 class TestProvisionStrategy:
-    def __init__(self, general_instructions: List[str], tester_action: List[str], subject_action: List[str] = [], subject_2_action: List[str] = []):
+    def __init__(
+            self,
+            general_instructions: List[str],
+            tester_action: List[str],
+            subject_action: List[str] = None,
+            subject_2_action: List[str] = None
+    ):
         self.general_instructions = general_instructions
         self.tester_action = tester_action
+
+        if subject_action:
+            subject_action = []
         self.subject_action = subject_action
+
+        if subject_2_action:
+            subject_2_action = []
         self.subject_2_action = subject_2_action
 
     def to_dict(self):
@@ -53,22 +74,27 @@ class TestProvisionStrategy:
         }
 
     @staticmethod
-    def from_dict(data):
+    def from_dict(data: dict):
         if data:
-            rez = TestProvisionStrategy(
-                general_instructions=data["general_instructions"],
-                tester_action=data["tester_action"],
-                subject_action=data["subject_action"],
-                subject_2_action=data["subject_2_action"] if "subject_2_action" in data else []
+            res = TestProvisionStrategy(
+                general_instructions=data.get("general_instructions", []),
+                tester_action=data.get("tester_action", []),
+                subject_action=data.get("subject_action", []),
+                subject_2_action=data.get("subject_2_action", [])
                 # Include other fields if necessary
             )
         else:
-            rez = TestProvisionStrategy.create_default()
-        return rez
+            res = TestProvisionStrategy.create_default()
+        return res
 
     @staticmethod
     def create_default():
-        return TestProvisionStrategy(general_instructions=[], tester_action=[], subject_action=[], subject_2_action=[])
+        return TestProvisionStrategy(
+            general_instructions=[],
+            tester_action=[],
+            subject_action=[],
+            subject_2_action=[]
+        )
 
 
 class Model:
@@ -78,9 +104,9 @@ class Model:
         description: str,
         classification: Classification,
         test_creation_instructions: List[str],
-        test_provision_strategy: TestProvisionStrategy,
+        test_provision_strategy: Union[TestProvisionStrategy, dict],
         result_requirements: Dict,
-        model_parameters: Dict = {},
+        model_parameters: Dict = None,
     ):
         self.version = version
         self.description = description
@@ -90,11 +116,18 @@ class Model:
             test_provision_strategy = TestProvisionStrategy(**test_provision_strategy)
         self.test_provision_strategy = test_provision_strategy
         self.result_requirements = result_requirements
+
+        if model_parameters:
+            model_parameters = {}
         self.model_parameters = model_parameters
 
     def to_dict(self):
-        classification_dict = self.classification.to_dict() if isinstance(self.classification, Classification) else self.classification
-        test_provision_strategy_dict = self.test_provision_strategy.to_dict() if isinstance(self.test_provision_strategy, TestProvisionStrategy) else self.test_provision_strategy
+        classification_dict = self.classification.to_dict() \
+            if isinstance(self.classification, Classification) \
+            else self.classification
+        test_provision_strategy_dict = self.test_provision_strategy.to_dict() \
+            if isinstance(self.test_provision_strategy, TestProvisionStrategy) \
+            else self.test_provision_strategy
         return {
             "version": self.version,
             "description": self.description,
@@ -134,10 +167,9 @@ class TestImplementation:
         subject_runtime_parameters: str = "",
         result: str = "",
         # TODO Extend log structure to store Q-A of each actor
-        test_log: List[str] = [],
+        test_log: List[str] = None,
     ):
         self.implementation_id = implementation_id if implementation_id else str(uuid.uuid4())
-        self.implementation_id = implementation_id
         self.test_desc = test_desc
         self.test_date = test_date
         self.tester_ai_version = tester_ai_version
@@ -146,8 +178,11 @@ class TestImplementation:
         self.tester_runtime_parameters = tester_runtime_parameters
         self.subject_runtime_parameters = subject_runtime_parameters
         self.result = result
-        self.test_log = test_log
         self.obtained_biases = obtained_biases
+
+        if test_log:
+            test_log = []
+        self.test_log = test_log
 
     def to_dict(self):
         return {
@@ -158,7 +193,7 @@ class TestImplementation:
         }
 
     @staticmethod
-    def from_dict(data):
+    def from_dict(data: dict):
         return TestImplementation(
             implementation_id=data.get("implementation_id", ""),
             test_desc=data.get("test_desc", ""),
@@ -174,18 +209,25 @@ class TestImplementation:
         )
 
     def save(self, file_name=TEST_IMPLEMENTATION_FILE):
+        # TODO: Try to make files workflow binary(for decrease system encode types)
         with open(file_name, "a") as file:
             json_record = json.dumps(self, default=lambda o: o.__dict__)
             file.write(json_record + "\n")
 
     @staticmethod
     def load(file_name=TEST_IMPLEMENTATION_FILE):
+        # TODO: Try to make files workflow binary(for decrease system encode types)
         with open(file_name, "r") as file:
             return [json.loads(line) for line in file]
 
 
 class TestSeries:
-    def __init__(self, series_id: str, model: Model, test_implementations: List[TestImplementation]):
+    def __init__(
+            self,
+            series_id: str,
+            model: Union[Model, dict],
+            test_implementations: List[TestImplementation]
+    ):
         self.series_id = series_id
         self.model = model
         self.test_implementations = test_implementations
@@ -198,6 +240,12 @@ class TestSeries:
             test_implementations=[TestImplementation.create_default()],
         )
 
+    def save(self, file_name=SERIES_DATA_FILE):
+        # TODO: Try to make files workflow binary(for decrease system encode types)
+        with open(file_name, "a") as file:
+            json_record = json.dumps(self, default=lambda o: o.__dict__)
+            file.write(json_record + "\n")
+
     def add_implementation(self, implementation: TestImplementation = None):
         if implementation is None:
             implementation = TestImplementation.create_default()
@@ -206,11 +254,6 @@ class TestSeries:
 
     def get_implementation_by_id(self, imp_id: str):
         return next((imp for imp in self.test_implementations if imp.implementation_id == imp_id), None)
-
-    def save(self, file_name=SERIES_DATA_FILE):
-        with open(file_name, "a") as file:
-            json_record = json.dumps(self, default=lambda o: o.__dict__)
-            file.write(json_record + "\n")
 
     @staticmethod
     def load(file_name=SERIES_DATA_FILE):
@@ -234,17 +277,22 @@ class TestSeries:
         }
 
     @staticmethod
-    def from_dict(data):
+    def from_dict(data: dict):
         model = Model.from_dict(data["model"])
         test_implementations = [TestImplementation.from_dict(ti) for ti in data["test_implementations"]]
 
-        return TestSeries(series_id=data["series_id"], model=model, test_implementations=test_implementations)
+        return TestSeries(
+            series_id=data["series_id"],
+            model=model,
+            test_implementations=test_implementations
+        )
 
 
 class TestSeriesList:
     def __init__(self):
         # Load JSON configuration
-        with open(f"{DATA_FOLDER}/test_config.json", "r") as file:
+        # TODO: Try to make files workflow binary(for decrease system encode types)
+        with open(TEST_SERIES_CONFIG, "r") as file:
             config = json.load(file)
         self.config = config
         self.series_list = []
@@ -279,7 +327,8 @@ class TestSeriesList:
         return next((series for series in self.series_list if series.series_id == series_id), None)
 
     def add_implementation_to_series(self, series_id: str, implementation: TestImplementation) -> str:
-        """Add implementation to selected series
+        """
+        Add implementation to selected series
 
         Args:
             series_id (str): ID of selected series
@@ -289,29 +338,37 @@ class TestSeriesList:
             str: new implementation id
         """
         series = self.get_series_by_id(series_id)
-        rez = None
+        res = None
         if series:
             series.add_implementation(implementation)
             self.save()
-            rez = series.test_implementations[-1].implementation_id
-        return rez
+            res = series.test_implementations[-1].implementation_id
+        return res
 
 
-""" default_test_series = TestSeries.create_default()
-default_test_series.save() """
+""" 
+default_test_series = TestSeries.create_default()
+default_test_series.save() 
+"""
 
-""" # Create or load TestSeriesList
+""" 
+# Create or load TestSeriesList
 series_list = TestSeriesList()
-series_list.load() """
+series_list.load() 
+"""
 
 # Add a new TestSeries
-""" new_series = TestSeries.create_default()
-series_list.add_series(new_series) """
+""" 
+new_series = TestSeries.create_default()
+series_list.add_series(new_series) 
+"""
 
-""" # Add a new TestImplementation to a specific TestSeries by ID
+""" 
+# Add a new TestImplementation to a specific TestSeries by ID
 series_id = "87e9c719-2633-4daa-ab49-0bd9c9ff6a04"
 new_implementation = TestImplementation.create_default()
 series_list.add_implementation_to_series(series_id, new_implementation)
 
 # You can also retrieve a specific series by ID
-specific_series = series_list.get_series_by_id(series_id) """
+specific_series = series_list.get_series_by_id(series_id) 
+"""
