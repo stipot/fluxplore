@@ -9,8 +9,8 @@ promt = promt[0] + promt[1]
 test_v1 = 'Social Welfare Advocates'
 test_v2 = 'Corporate Executives'
 
-compet_v1 = "Automation in the workforce leads to job loss and economic inequality"
-compet_v2 = "Automation in the workforce is beneficial for efficiency"
+compet_v1 = "Embracing automation is necessary for efficiency"
+compet_v2 = "Automation leads to job loss and threatens workers' rights"
 
 promt2 = f'generate two opposing generalized statements aligning with the chosen paradigms on a selected subject, using a pre-defined template. For instance, given the paradigms of "{test_v1}" and "{test_v2}" in the {area} field, the instruction could be: "Given the paradigms of "{test_v1}" and "{test_v2}", generate two opposing statements on the topic of automation. Use the following template: p1: "____ is right", p2: "____ is wrong". Each blank should be filled with a general or specific form of automation."'
 
@@ -27,7 +27,7 @@ compet_prompt_v1 = [
     'Counterargument template: "You may have overlooked the fact that, because of ___, technology does not '
     'necessarily harms society."',
 ]
-compet_prompt_v1 = compet_prompt_v1[0] + compet_prompt_v1[1]
+compet_prompt_v1 = compet_prompt_v1[0] + compet_prompt_v1[1] + compet_prompt_v1[2]
 
 compet_prompt_v2 = [
     f'Your task is to advocate for the stance "{compet_v2}", and focus on the specific semantic and '
@@ -42,7 +42,7 @@ compet_prompt_v2 = [
     'Counterargument template: "You may have overlooked the fact that, because of ___, technology does not '
     'necessarily harms society."',
 ]
-compet_prompt_v2 = compet_prompt_v2[0] + compet_prompt_v2[1]
+compet_prompt_v2 = compet_prompt_v2[0] + compet_prompt_v2[1] + compet_prompt_v2[2]
 
 openai.api_key = ''
 
