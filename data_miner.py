@@ -52,6 +52,9 @@ if __name__ == '__main__':
                          '[{"first": "Labor Unions", "second": "Tech Companies", "desc": "Labor unions may express concerns '
                          'about job displacement and socioeconomic inequality resulting from technological '
                          'advancements, while techcompanies may emphasize the benefits of innovation, productivity, '
+                         'and economic growth."}, {"first": "Labor Unions", "second": "Tech Companies", "desc": "Labor unions may express concerns '
+                         'about job displacement and socioeconomic inequality resulting from technological '
+                         'advancements, while techcompanies may emphasize the benefits of innovation, productivity, '
                          'and economic growth."}]']),
         paradigms=[]
     )
