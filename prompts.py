@@ -1,20 +1,16 @@
 from dataclasses import dataclass
-from typing import List
-
-
-@dataclass(frozen=True)
-class CompetingArguments:
-    first: str
-    second: str
+from typing import List, Dict
 
 
 @dataclass
 class GeneratedStatementsArguments:
     first_statement: str
     second_statement: str
-    prompt: str
+    first_prompt: str
+    second_prompt: str
 
-    arguments: List[CompetingArguments] | None
+    first_arguments: List[Dict] | None
+    second_arguments: List[Dict] | None
 
 
 @dataclass
