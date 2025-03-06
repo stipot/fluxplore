@@ -16,12 +16,12 @@ Promote AI Fairness and Transparency: By providing insights into how AI models r
 # Roadmap
 | Status | Result | Plan |
 |--------------------|----------|----------|
-| :white_square_button: | AI Context Bias Testing Model rev. 5 | June 5, 2023 |
-| :white_square_button: | AI Context Bias Testing Model rev. 6 | June 30, 2023 |
-| :white_square_button: | Machine readable AI Context Bias Testing Model | February 3, 2024 |
-| :white_square_button: | Test Development and Application Framework | March 1, 2024 |
-| :white_square_button: | Community available cooperation Framework | August 30, 2024 |
-| :white_square_button: | Tests on AI Context Bias Testing database | March 1, 2024 |
+| :white_square_button: | AI Context Bias Testing Model rev. 5 | June 5, 2025 |
+| :white_square_button: | AI Context Bias Testing Model rev. 6 | June 30, 2025 |
+| :white_square_button: | Machine readable AI Context Bias Testing Model | July 3, 2025 |
+| :white_square_button: | Test Development and Application Framework | August 1, 2025 |
+| :white_square_button: | Community available cooperation Framework | October 30, 2025 |
+| :white_square_button: | Tests on AI Context Bias Testing database | November 1, 2025 |
 
 # Model Revision 5: AI Context Bias Testing Framework
 
